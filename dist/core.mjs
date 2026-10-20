@@ -45,7 +45,7 @@ export function saveEntry(s,input) {
   let event=input.event;
   const hasCustom=event==='其他'&&typeof input.customEvent==='string'&&input.customEvent.trim()!=='';
   if(hasCustom)event=eventName(input.customEvent);
-  else if(!eventOptions(s).includes(event)&&event!==old?.event)throw Error('请选择发生的事情');
+  else if(!eventOptions(s).includes(event)&&(!old||event!==old.event))throw Error('请选择发生的事情');
   const amount=cents(input.amount),note=String(input.note||'');
   if(characters(note)>200)throw Error('吐槽最多200个字');
   const d=input.date||today();
