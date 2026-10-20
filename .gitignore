@@ -1,0 +1,7 @@
+node_modules/
+.local/
+*.zip
+qa/
+.openai/
+patch-drafts.py
+*.log

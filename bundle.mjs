@@ -1,0 +1,17 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+const root=path.dirname(fileURLToPath(import.meta.url));
+const read=n=>fs.readFileSync(path.join(root,'dist',n),'utf8');
+const core=read('core.mjs').replace(/^export /gm,'');
+const store=read('store.mjs').replace(/^import .*;\r?\n/gm,'').replace(/^export /gm,'');
+const app=read('app.mjs').replace(/^import .*;\r?\n/gm,'');
+const exports=['VERSION','EVENTS','TYPES','uuid','emptyState','characters','today','money','plainMoney','cents','progress','activeGoal','records','totals','createGoal','editGoal','saveEntry','toggleTransfer','deleteEntry','restoreEntry','purge','archiveGoal','removeGoal','validDate','backup','validateBackup'];
+const js=`${core}\nconst C={${exports.join(',')}};\n${store}\n${app}`;
+const css=read('style.css');
+const favicon='data:image/svg+xml,'+encodeURIComponent(read('icon.svg'));
+let html=read('index.html').replace('<link rel="icon" href="./icon.svg" type="image/svg+xml">',`<link rel="icon" href="${favicon}" type="image/svg+xml">`).replace('<link rel="stylesheet" href="./style.css">',`<style>${css}</style>`).replace('<script type="module" src="./app.mjs"></script>',`<script type="module">${js.replaceAll('</script','<\\/script')}</script>`);
+fs.writeFileSync(path.join(root,'窝囊费-H5体验版.html'),html,'utf8');
+fs.mkdirSync(path.join(root,'qa'),{recursive:true});
+fs.writeFileSync(path.join(root,'qa','bundle-syntax.mjs'),js,'utf8');
+console.log(JSON.stringify({singleFileBytes:Buffer.byteLength(html),imports:(js.match(/^import /gm)||[]).length,output:'窝囊费-H5体验版.html'}));
