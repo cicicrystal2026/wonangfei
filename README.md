@@ -18,9 +18,11 @@
 
 源码仓库：https://github.com/cicicrystal2026/wonangfei
 
-自测发布采用 GitHub Pages，发布目录为 `dist/`，工作流先运行规则测试和语法检查，通过后部署验收环境。正式域名在用户验收后另行配置；本版本没有添加CNAME或修改DNS。手机直接用浏览器打开自测地址即可体验，无需安装。
+网站采用 GitHub Pages，发布目录为 `dist/`，工作流先运行规则测试和语法检查，通过后自动部署。正式域名为 wonangfei.org，Cloudflare 管理 DNS，GitHub Pages 提供 HTTPS。手机和电脑直接用浏览器打开即可体验，无需安装。
 
-自测地址：https://cicicrystal2026.github.io/wonangfei/
+正式地址：https://wonangfei.org/
+
+原自测地址：https://cicicrystal2026.github.io/wonangfei/ （绑定域名后由 GitHub Pages 跳转）
 
 ## 当前边界
 
