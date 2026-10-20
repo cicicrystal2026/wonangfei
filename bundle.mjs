@@ -6,7 +6,7 @@ const read=n=>fs.readFileSync(path.join(root,'dist',n),'utf8');
 const core=read('core.mjs').replace(/^export /gm,'');
 const store=read('store.mjs').replace(/^import .*;\r?\n/gm,'').replace(/^export /gm,'');
 const app=read('app.mjs').replace(/^import .*;\r?\n/gm,'');
-const exports=['VERSION','EVENTS','TYPES','uuid','emptyState','characters','today','money','plainMoney','cents','progress','activeGoal','records','totals','createGoal','editGoal','saveEntry','toggleTransfer','deleteEntry','restoreEntry','purge','archiveGoal','removeGoal','validDate','backup','validateBackup'];
+const exports=['VERSION','EVENTS','TYPES','uuid','emptyState','characters','today','money','plainMoney','cents','progress','activeGoal','records','totals','createGoal','editGoal','saveEntry','toggleTransfer','deleteEntry','restoreEntry','purge','archiveGoal','removeGoal','validDate','backup','validateBackup','customEvents','eventOptions','eventName','addCustomEvent','removeCustomEvent'];
 const js=`${core}\nconst C={${exports.join(',')}};\n${store}\n${app}`;
 const css=read('style.css');
 const favicon='data:image/svg+xml,'+encodeURIComponent(read('icon.svg'));
